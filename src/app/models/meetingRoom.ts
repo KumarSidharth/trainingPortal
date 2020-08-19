@@ -1,10 +1,10 @@
 export enum MeetingRoom {
-    'Board Room',
-    'Townhall',
-    'Newton',
-    'Rutherford',
-    'Darwin',
-    'Curie',
-    'Garden',
-    'Parking lot',
+    BoardRoom  = 'Board Room',
+    Townhall   = 'Townhall',
+    Newton     = 'Newton',
+    Rutherford = 'Rutherford',
+    Darwin     = 'Darwin',
+    Curie      = 'Curie',
+    Garden     = 'Garden',
+    Parking    = 'Parking lot',
 }

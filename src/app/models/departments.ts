@@ -1,7 +1,7 @@
 export enum Department {
-    'Human Resource',
-    'Finance',
-    'Product Development',
-    'Security',
-    'IT'
+    HR          = 'Human Resource',
+    Finance     = 'Finance',
+    Development = 'Product Development',
+    Security    = 'Security',
+    IT          = 'IT & Operations'
 }

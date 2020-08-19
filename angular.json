@@ -28,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/12-column-grid/src/grid.scss"
             ],
             "scripts": []
           },
