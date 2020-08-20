@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ITrainingResonse } from '../models/trainingResponse';
 import { Training } from '../models/training';
+import { TrainingForm } from '../models/trainingForm';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,7 @@ export class TrainingService {
   /**
    * @todo refactor map
    */
-  getTrainingById(trainingId: Training['id']): Observable<Training> {
+  getTrainingById(trainingId: TrainingForm['id']): Observable<Training> {
     return this.http.get<ITrainingResonse>(`${this.trainingUrl}/${trainingId}`).pipe(
       map(trainingResponse => this.changeTrainingTimeType(trainingResponse))
     );
@@ -49,7 +50,7 @@ export class TrainingService {
   }
 
   editTaining(training: Training): Observable<Training> {
-    return this.http.put<ITrainingResonse>(this.trainingUrl, training).pipe(
+    return this.http.put<ITrainingResonse>(`${this.trainingUrl}/${training.id}`, training).pipe(
       map(trainingResponse => this.changeTrainingTimeType(trainingResponse)));
   }
 }

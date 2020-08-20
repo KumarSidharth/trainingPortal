@@ -2,10 +2,13 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { Department } from '../models/departments';
 import { NgForm } from '@angular/forms';
 import { MeetingRoom } from '../models/meetingRoom';
-import Swal from 'sweetalert2';
+import Swal, { SweetAlertOptions } from 'sweetalert2';
 import { TrainingService } from '../services/training.service';
 import { Training } from '../models/training';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { flatMap, take } from 'rxjs/operators';
+import { TrainingForm } from '../models/trainingForm';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'infrrd-create-training',
@@ -14,20 +17,34 @@ import { Router } from '@angular/router';
 })
 export class CreateTrainingComponent implements OnInit, AfterViewInit {
 
-  @ViewChild('firstInput') private firstInput: ElementRef;
+  @ViewChild('firstInput') private firstInput: ElementRef<HTMLInputElement>;
   departments = Object.values(Department);
   meetingRooms = Object.values(MeetingRoom);
   durations = Array(8).fill(1)
                       .map( (n, index) => n += index);
-  loading = false;
   today: string;
+  form: TrainingForm = {
+    id: '',
+    title: '',
+    department: null,
+    duration: null,
+    date: null,
+    startTime: null,
+    room: null,
+  };
+  mode: 'create' | 'update' = 'create';
 
   constructor(
     private trainingService: TrainingService,
     private router: Router,
+    private activeRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    if (this.activeRoute.routeConfig.path.match('edit')) {
+      this.mode = 'update';
+      this.getTraining();
+    }
     this.setToday();
   }
 
@@ -41,6 +58,16 @@ export class CreateTrainingComponent implements OnInit, AfterViewInit {
     }
   }
 
+  getTraining(): void {
+    this.activeRoute.paramMap
+        .pipe(
+          take(1),
+          flatMap(paramMap => this.trainingService.getTrainingById(paramMap.get('id'))
+        ))
+        .subscribe( (training: Training) =>
+          this.form = new TrainingForm(training));
+  }
+
   setToday() {
     const date = new Date();
     const month = date.getMonth() + 1; // January is 0;
@@ -52,19 +79,42 @@ export class CreateTrainingComponent implements OnInit, AfterViewInit {
   }
 
   create(form: NgForm): void {
-    console.log(form);
-    this.loading = true;
-    Swal.fire({
-      title: 'Saving',
-      text: 'Training is being created...',
-      timerProgressBar: true,
-      onBeforeOpen: () => Swal.showLoading()
-    });
-    if (form.valid) {
-      this.trainingService.createTraining(new Training(form.value))
+    this.save(
+      form,
+      this.trainingService.createTraining(new Training(form.value)),
+      {
+        title: 'Saving',
+        text: 'Training is being created...',
+        timerProgressBar: true,
+        onBeforeOpen: () => Swal.showLoading()
+      });
+  }
+
+  edit(form: NgForm): void {
+    this.save(
+      form,
+      this.trainingService.editTaining(form.value),
+      {
+        title: 'Changing',
+        text: 'Training is being editted...',
+        timerProgressBar: true,
+        onBeforeOpen: () => Swal.showLoading()
+      });
+  }
+
+  save(form: NgForm,
+       training$: Observable<Training>,
+       swalOptions: SweetAlertOptions): void {
+
+      if (!form.valid) {
+        return;
+      }
+
+      Swal.fire(swalOptions);
+      training$
         .subscribe( () => {
           Swal.fire(
-            'Training created',
+            'Training saved',
             `Scheduled on ${form.value.date} at ${form.value.startTime}`,
             'success'
           ).then( () => this.router.navigate(['trainings']));
@@ -76,7 +126,7 @@ export class CreateTrainingComponent implements OnInit, AfterViewInit {
             text: 'Something went wrong!',
           });
         });
-    }
+
   }
 
 }

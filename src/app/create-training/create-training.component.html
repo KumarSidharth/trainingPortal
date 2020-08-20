@@ -2,15 +2,15 @@
 <h1>
     Create Training
 </h1>
-<form #form="ngForm"
-    (submit)="create(form)"
-    [class.submitted]="form.submitted" >
+<form #trainingForm="ngForm"
+    (submit)="mode === 'create'? create(trainingForm) : edit(trainingForm)"
+    [class.submitted]="trainingForm.submitted" >
 
     <input type="hidden"
             name="id"
             autocomplete="OFF"
             readonly
-            ngModel>
+            [(ngModel)]="form.id" >
 
     <fieldset class="input-group">
         <input type="text"
@@ -18,7 +18,7 @@
                 name="title"
                 required
                 #firstInput
-                ngModel/>
+                [(ngModel)]="form.title"/>
         <label for="title">
             Training title
         </label>
@@ -32,7 +32,7 @@
         <select id="department"
                 name="department"
                 required
-                ngModel>
+                [(ngModel)]="form.department">
 
             <option *ngFor="let department of departments"
                     [value]="department">
@@ -57,7 +57,7 @@
                 name="date"
                 [min]="today"
                 required
-                ngModel>
+                [(ngModel)]="form.date">
 
             <label for="date">
                 Date
@@ -70,7 +70,7 @@
                 id="startTime"
                 name="startTime"
                 required
-                ngModel>
+                [(ngModel)]="form.startTime">
             <label for="startTime">
                 Start time
             </label>
@@ -84,7 +84,7 @@
             <select id="duration"
                     name="duration"
                     required
-                    ngModel>
+                    [(ngModel)]="form.duration">
                 <option *ngFor="let t of durations"
                         [value]="t">
                     {{t}} hours
@@ -99,7 +99,7 @@
             <select id="room"
                     name="room"
                     required
-                    ngModel>
+                    [(ngModel)]="form.room">
                 <option *ngFor="let meetingRoom of meetingRooms"
                         [value]="meetingRoom">
                     {{meetingRoom}}
@@ -118,7 +118,7 @@
             <textarea id="description"
                     name="description"
                     rows="6"
-                    ngModel>
+                    [(ngModel)]="form.description">
             </textarea>
             <label for="description">
                 Description
@@ -132,7 +132,8 @@
             Save
         </button>
         <button type="reset"
-                class="col-4">
+                class="col-4"
+                (click)="mode === 'update' ? getTraining() : undefined">
             Clear
         </button>
     </div>
