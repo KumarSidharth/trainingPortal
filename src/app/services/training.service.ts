@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ITrainingResonse } from '../models/trainingResponse';
-import { ITraining } from '../models/training';
+import { Training } from '../models/training';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class TrainingService {
 
   constructor(private http: HttpClient) { }
 
-  changeTrainingTimeType = (training: ITrainingResonse): ITraining => {
+  changeTrainingTimeType = (training: ITrainingResonse): Training => {
       return {
         ...training,
         time: new Date(training.time)
@@ -22,7 +22,7 @@ export class TrainingService {
   }
 
 
-  getTainings(query?: string): Observable<ITraining[]> {
+  getTainings(query?: string): Observable<Training[]> {
     const queryParams = {
       search: query
     };
@@ -36,19 +36,19 @@ export class TrainingService {
   /**
    * @todo refactor map
    */
-  getTrainingById(trainingId: ITraining['id']): Observable<ITraining> {
+  getTrainingById(trainingId: Training['id']): Observable<Training> {
     return this.http.get<ITrainingResonse>(`${this.trainingUrl}/${trainingId}`).pipe(
       map(trainingResponse => this.changeTrainingTimeType(trainingResponse))
     );
   }
 
-  createTraining(training: ITraining): Observable<ITraining> {
+  createTraining(training: Training): Observable<Training> {
     return this.http.post<ITrainingResonse>(this.trainingUrl, training).pipe(
       map(trainingResponse => this.changeTrainingTimeType(trainingResponse))
     );
   }
 
-  editTaining(training: ITraining): Observable<ITraining> {
+  editTaining(training: Training): Observable<Training> {
     return this.http.put<ITrainingResonse>(this.trainingUrl, training).pipe(
       map(trainingResponse => this.changeTrainingTimeType(trainingResponse)));
   }

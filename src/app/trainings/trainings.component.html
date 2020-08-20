@@ -1,3 +1,14 @@
-<pre>
-    {{ trainings$ | async | json }}
-</pre>
+<h1>
+    Scheduled Trainings
+</h1>
+
+<div class="grid">
+    <div class="training add">
+
+    </div>
+    <div *ngFor="let training of (trainings$ | async)">
+        <pre>
+            {{ training | json }}
+        </pre>
+    </div>
+</div>

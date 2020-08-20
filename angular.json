@@ -28,6 +28,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/12-column-grid/src/grid.scss",
               "src/styles.scss"
             ],
             "scripts": []

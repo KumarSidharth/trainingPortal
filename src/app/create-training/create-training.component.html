@@ -1,1 +1,142 @@
-<p>create-training works!</p>
+<main class="align-center">
+<h1>
+    Create Training
+</h1>
+<form #form="ngForm"
+    (submit)="create(form)"
+    [class.submitted]="form.submitted" >
+
+    <input type="hidden"
+            name="id"
+            autocomplete="OFF"
+            readonly
+            ngModel>
+
+    <fieldset class="input-group">
+        <input type="text"
+                id="title"
+                name="title"
+                required
+                #firstInput
+                ngModel/>
+        <label for="title">
+            Training title
+        </label>
+        <div class="errorMessage">
+            Title is required
+        </div>
+        
+    </fieldset>
+
+    <fieldset class="input-group">
+        <select id="department"
+                name="department"
+                required
+                ngModel>
+
+            <option *ngFor="let department of departments"
+                    [value]="department">
+                {{department}}
+            </option>
+        </select>
+        <label for="department">
+            Department
+        </label>
+        <div class="errorMessage">Department is required</div>
+    </fieldset>
+
+    <fieldset class="grid">
+        <!-- col-**-## and grid are classes comming from the libray 
+            12-column-grid
+            and not bootstrap
+            I am the author of this library
+        -->
+        <div class="input-group col-sm-6 col-xs-12">
+            <input type="date"
+                id="date"
+                name="date"
+                [min]="today"
+                required
+                ngModel>
+
+            <label for="date">
+                Date
+            </label>
+            <div class="errorMessage">Date is required</div>
+        </div>
+        
+        <div class="input-group col-sm-6 col-xs-12">
+            <input type="time"
+                id="startTime"
+                name="startTime"
+                required
+                ngModel>
+            <label for="startTime">
+                Start time
+            </label>
+            <div class="errorMessage">Start time is required</div>
+        </div>
+
+    </fieldset>
+
+    <fieldset class="grid">
+        <div class="input-group col-sm-6 col-xs-12">
+            <select id="duration"
+                    name="duration"
+                    required
+                    ngModel>
+                <option *ngFor="let t of durations"
+                        [value]="t">
+                    {{t}} hours
+                </option>
+            </select>
+            <label for="duration">
+                Duration
+            </label>
+            <div class="errorMessage">Training duration is required</div>
+        </div>
+        <div class="input-group col-sm-6 col-xs-12">
+            <select id="room"
+                    name="room"
+                    required
+                    ngModel>
+                <option *ngFor="let meetingRoom of meetingRooms"
+                        [value]="meetingRoom">
+                    {{meetingRoom}}
+                </option>
+            </select>
+            <label for="room">
+                Meeting Room
+            </label>
+            <div class="errorMessage">Meeting Room is required</div>
+        </div>
+        
+    </fieldset>
+
+    <fieldset>
+        <div class="input-group">
+            <textarea id="description"
+                    name="description"
+                    rows="6"
+                    ngModel>
+            </textarea>
+            <label for="description">
+                Description
+            </label>
+        </div>
+    </fieldset>
+
+    <div class="button-group">
+        <button type="submit"
+                class="col-4">
+            Save
+        </button>
+        <button type="reset"
+                class="col-4">
+            Clear
+        </button>
+    </div>
+    
+
+</form>
+</main>

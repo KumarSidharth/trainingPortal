@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TrainingService } from '../services/training.service';
 import { Observable, of } from 'rxjs';
-import { ITraining } from '../models/training';
+import { Training } from '../models/training';
 import { take, catchError } from 'rxjs/operators';
 
 @Component({
@@ -11,7 +11,7 @@ import { take, catchError } from 'rxjs/operators';
 })
 export class TrainingsComponent implements OnInit {
 
-  trainings$: Observable<ITraining[]>;
+  trainings$: Observable<Training[]>;
 
   constructor(
     private trainingService: TrainingService
