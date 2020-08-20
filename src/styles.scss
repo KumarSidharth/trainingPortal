@@ -8,8 +8,10 @@
 }
 
 :root {
+    --theme: white;
     --body-bg: #e8e8e8;
     --bulge-concave-bg: linear-gradient(145deg, #d1d1d1, #f8f8f8);
+    --bulge-convex-bg: linear-gradient(145deg, #f8f8f8, #d1d1d1);
     --bulge-shadow: 10px 10px 17px #c5c5c5, 
                     -10px -10px 17px #ffffff;
     --dip-shadow: inset 10px 10px 17px #c5c5c5, 
@@ -69,6 +71,33 @@ button {
     &[type=submit] {
         border: var(--button-submit-border);
         color: var(--button-submit-color);
+    }
+}
+
+a {
+    text-decoration: none;
+    &.icon {
+        --size: 30px;
+        border-radius: var(--size);
+        width: var(--size);
+        height: var(--size);
+        font-size: calc( var(--size) * 3 / 5 );
+        box-shadow: var(--bulge-shadow);
+        background: var(--bulge-convex-bg);
+        display: grid;
+        place-items: center;
+        border: 1px solid #d8d8d8;
+        transition-duration: 0.5s;
+        cursor: pointer;
+        user-select: none;
+        &:hover,
+        &:focus {
+            transform: scale(1.2);
+            &:active {
+                background: var(--bulge-concave-bg);
+            }
+        }
+
     }
 }
 

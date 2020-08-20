@@ -1,0 +1,70 @@
+ul {
+    --grid-gap: 24px;
+    --grid-item-height: 200px;
+    --grid-item-min-width: 300px;
+    display: grid;
+    grid-gap: var(--grid-gap);
+    gap: var(--grid-gap);
+    grid-template-columns: repeat(auto-fit, minmax(var(--grid-item-min-width), 1fr));
+    grid-auto-rows: var(--grid-item-height);
+    list-style: none;
+    padding: 0;
+    margin: 1.5em;
+}
+
+li {
+    --margin: 30px;
+    padding: var(--margin);
+    border-radius: var(--margin);
+    box-shadow: var(--bulge-shadow);
+    position: relative;
+    a {
+        position: absolute;
+        top: calc(var(--margin) * 2 / 5);
+        right: calc(var(--margin) * 2 / 5);
+    }
+    p {
+        margin: 5px 0;
+    }
+}
+
+h3 {
+    margin: 0;
+    font-weight: 500;
+}
+
+.room,
+.department {
+    font-size: 14px;
+}
+
+.add {
+    --plus-width: 10px;
+    position: relative;
+    display: grid;
+    place-items: center;
+    &::after,
+    &::before {
+        content: '';
+        position: absolute;
+        border-radius: var(--plus-width);
+        background: var(--theme);
+        /// very high intencity shadow
+        /// easy to make for dip
+        /// @todo make it bulge
+        box-shadow: inset 2px 2px 3px #d1d1d1, inset -2px -2px 3px #ffffff;
+    }
+
+    /// horizontal line in +
+    &::before {
+        width: calc( var(--grid-item-height) - 2 * var(--margin));
+        height: var(--plus-width);
+        
+    }
+    /// verticle line in +
+    &::after {
+        height: calc( var(--grid-item-height) - 3 * var(--margin));
+        width: var(--plus-width);
+    }
+    
+}
