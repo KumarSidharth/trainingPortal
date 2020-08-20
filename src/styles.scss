@@ -71,3 +71,8 @@ button {
         color: var(--button-submit-color);
     }
 }
+
+/// @todo fix all sweetalert issues
+.swal2-actions.swal2-loading .swal2-styled.swal2-confirm {
+    min-width: 50px;
+}

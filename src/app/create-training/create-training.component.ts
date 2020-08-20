@@ -5,7 +5,6 @@ import { MeetingRoom } from '../models/meetingRoom';
 import Swal from 'sweetalert2';
 import { TrainingService } from '../services/training.service';
 import { Training } from '../models/training';
-import { finalize } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
@@ -55,18 +54,20 @@ export class CreateTrainingComponent implements OnInit, AfterViewInit {
   create(form: NgForm): void {
     console.log(form);
     this.loading = true;
+    Swal.fire({
+      title: 'Saving',
+      text: 'Training is being created...',
+      timerProgressBar: true,
+      onBeforeOpen: () => Swal.showLoading()
+    });
     if (form.valid) {
       this.trainingService.createTraining(new Training(form.value))
-        .pipe(
-          finalize( () => this.loading = false)
-        )
         .subscribe( () => {
           Swal.fire(
             'Training created',
             `Scheduled on ${form.value.date} at ${form.value.startTime}`,
             'success'
-          );
-          this.router.navigate(['trainings']);
+          ).then( () => this.router.navigate(['trainings']));
         }, (error) => {
           console.error(error);
           Swal.fire({
