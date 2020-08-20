@@ -55,6 +55,7 @@
             <input type="date"
                 id="date"
                 name="date"
+                [min]="today"
                 required
                 ngModel>
 
@@ -66,11 +67,11 @@
         
         <div class="input-group col-sm-6 col-xs-12">
             <input type="time"
-                id="time"
-                name="time"
+                id="startTime"
+                name="startTime"
                 required
                 ngModel>
-            <label for="time">
+            <label for="startTime">
                 Start time
             </label>
             <div class="errorMessage">Start time is required</div>
