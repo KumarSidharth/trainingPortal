@@ -2,13 +2,21 @@
     Scheduled Trainings
 </h1>
 
-<div class="grid">
-    <div class="training add">
+<ul>
+    <li class="add">
 
-    </div>
-    <div *ngFor="let training of (trainings$ | async)">
-        <pre>
-            {{ training | json }}
-        </pre>
-    </div>
-</div>
+    </li>
+    <li *ngFor="let training of (trainings$ | async)">
+        
+        <h3>{{training.title}}</h3>
+        <div class="time">
+            <small>{{training.time | date}}</small>
+            - 
+            <small>{{training.duration}}</small>
+        </div>
+        <p class="room">Room - {{training.room}} </p>
+        <p class="department">Department - {{training.department}} </p>
+        <p class="description"> {{training.description}} </p>
+        <a class="icon" [routerLink]="'edit/' + training.id" >✎</a>
+    </li>
+</ul>

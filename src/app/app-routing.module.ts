@@ -24,7 +24,7 @@ const routes: Routes = [
         component: CreateTrainingComponent
       },
       {
-        path: 'edit',
+        path: 'edit/:id',
         component: CreateTrainingComponent
       },
       {
