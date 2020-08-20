@@ -1,31 +1,24 @@
 import { MeetingRoom } from './meetingRoom';
 import { Department } from './departments';
+import { TrainingForm } from './trainingForm';
 
 export class Training {
     id: number;
     title: string;
     department: Department;
-    duration: string;
+    duration: number;
     time: Date;
     room: MeetingRoom;
     description?: string;
 
-    constructor({ id, title, department, duration, date, startTime, room, description}) {
-        this.id = id;
+    constructor({ id, title, department, duration, date, startTime, room, description}: TrainingForm) {
+        this.id = +id;
         this.title = title;
         this.department = department;
         this.time = this.createTime(date, startTime);
-        this.duration = this.setDuration(duration);
+        this.duration = +duration;
         this.room = room;
         this.description = description;
-    }
-
-    setDuration(duration: string): string {
-        if (Number(duration) > 1) {
-            return duration + ' hours';
-        } else {
-            return duration + ' hour';
-        }
     }
 
     createTime(date: string, startTime: string) {

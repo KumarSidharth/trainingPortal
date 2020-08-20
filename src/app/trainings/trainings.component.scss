@@ -43,6 +43,7 @@ h3 {
     position: relative;
     display: grid;
     place-items: center;
+    cursor: pointer;
     &::after,
     &::before {
         content: '';
