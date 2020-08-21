@@ -1,6 +1,14 @@
-<h1>
-    Scheduled Trainings
-</h1>
+<header>
+    <h1 class="col-sm-6 col-xs-12">
+        Scheduled Trainings
+    </h1>
+    <form class="searchIconForm">
+        <input type="search"
+                name="search"
+                [(ngModel)]="searchInput">
+        <button>🔎</button>
+    </form>
+</header>
 
 <ul>
     <li class="add" routerLink="create">

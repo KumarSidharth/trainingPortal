@@ -1,3 +1,13 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.searchIconForm {
+    margin-right: 1em;
+}
+
 ul {
     --grid-gap: 24px;
     --grid-item-height: 200px;
