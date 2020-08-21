@@ -14,7 +14,7 @@ export class HighlightPipe implements PipeTransform {
       return value;
     }
     const re = new RegExp(search, 'gi');
-    return value.replace(re, '<mark>$&</mark>');
+    return value.toString().replace(re, '<mark>$&</mark>');
   }
 
 }

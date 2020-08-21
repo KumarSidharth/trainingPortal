@@ -1,14 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { TrainingService } from '../services/training.service';
-import { of, forkJoin } from 'rxjs';
+import { of } from 'rxjs';
 import { Training } from '../models/training';
-import { catchError, flatMap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CardStagger } from '../animations/card-stagger.animation';
 
 @Component({
   selector: 'infrrd-trainings',
   templateUrl: './trainings.component.html',
-  styleUrls: ['./trainings.component.scss']
+  styleUrls: ['./trainings.component.scss'],
+  animations: [CardStagger]
 })
 export class TrainingsComponent implements OnInit {
 
