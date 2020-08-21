@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  server: 'http://localhost:3000/'
+  server: 'https://serene-springs-20036.herokuapp.com/api/'
 };
