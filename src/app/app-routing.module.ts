@@ -10,7 +10,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 const routes: Routes = [
   {
     path: '',
-    component: WelcomeComponent
+    redirectTo: 'trainings',
+    pathMatch: 'full'
   },
   {
     path: 'trainings',
