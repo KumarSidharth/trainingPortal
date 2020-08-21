@@ -17,6 +17,8 @@
     --dip-shadow: inset 10px 10px 17px #c5c5c5, 
                   inset -10px -10px 17px #ffffff;
 
+    --faint-text-color: #cccccc;
+
     /// picked this blue color from sweet alerts 2 button
     /// blue with green looks great togather
     /// without attracting too much of attention
@@ -75,7 +77,8 @@ button {
     }
 }
 
-a {
+a,
+button {
     text-decoration: none;
     &.icon {
         --size: 30px;
@@ -85,12 +88,13 @@ a {
         font-size: calc( var(--size) * 3 / 5 );
         box-shadow: var(--bulge-shadow);
         background: var(--bulge-convex-bg);
-        display: grid;
+        display: inline-grid;
         place-items: center;
         border: 1px solid #d8d8d8;
         transition-duration: 0.5s;
         cursor: pointer;
         user-select: none;
+        padding: 0;
         &:hover,
         &:focus {
             transform: scale(1.2);

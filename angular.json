@@ -29,7 +29,8 @@
             ],
             "styles": [
               "node_modules/12-column-grid/src/grid.scss",
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/form.scss"
             ],
             "scripts": []
           },
