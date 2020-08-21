@@ -6,7 +6,8 @@
         <input type="search"
                 name="search"
                 placeholder="search"
-                [(ngModel)]="searchInput">
+                [(ngModel)]="searchInput"
+                (ngModelChange)="addQueryParams($event)">
         <button>🔎</button>
     </form>
 </header>
@@ -15,7 +16,7 @@
     <li class="add" routerLink="create">
 
     </li>
-    <li *ngFor="let training of (trainings$ | async)">
+    <li *ngFor="let training of filteredTrainings">
         
         <h3 [innerHTML]="training.title | highlight: searchInput" ></h3>
         <div class="time">
