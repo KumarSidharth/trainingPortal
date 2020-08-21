@@ -11,6 +11,7 @@ import { TrainingEventComponent } from './training-event/training-event.componen
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { UrlInterceptorService } from './services/url-interceptor.service';
+import { HighlightPipe } from './pipes/highlight.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UrlInterceptorService } from './services/url-interceptor.service';
     CreateTrainingComponent,
     TrainingEventComponent,
     NotFoundPageComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    HighlightPipe,
   ],
   imports: [
     BrowserModule,

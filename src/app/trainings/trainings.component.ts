@@ -12,7 +12,7 @@ import { take, catchError } from 'rxjs/operators';
 export class TrainingsComponent implements OnInit {
 
   trainings$: Observable<Training[]>;
-  searchInput = '';
+  searchInput: string;
 
   constructor(
     private trainingService: TrainingService

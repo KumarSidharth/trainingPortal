@@ -5,6 +5,7 @@
     <form class="searchIconForm">
         <input type="search"
                 name="search"
+                placeholder="search"
                 [(ngModel)]="searchInput">
         <button>🔎</button>
     </form>
@@ -16,21 +17,28 @@
     </li>
     <li *ngFor="let training of (trainings$ | async)">
         
-        <h3>{{training.title}}</h3>
+        <h3 [innerHTML]="training.title | highlight: searchInput" ></h3>
         <div class="time">
-            <small *ngIf="training.time">{{training.time | date}}</small>
+            <small *ngIf="training.time"
+                    [innerHTML]="training.time | date | highlight: searchInput" >
+            </small>
             <ng-template [ngIf]="training.duration">
                 <small> - </small> 
-                <small>
-                    {{training.duration}} 
-                    {{ training.duration > 1? 'hours' : 'hour'}}
+                <small [innerHTML]="training.duration | highlight: searchInput">
                 </small>
+                <small>{{ training.duration > 1? ' hours' : ' hour'}}</small>
             </ng-template>
             
         </div>
-        <p class="room">Room - {{training.room}} </p>
-        <p class="department">Department - {{training.department}} </p>
-        <p class="description"> {{training.description}} </p>
+        <p class="room"
+            [innerHTML]=" 'Room - ' + training.room | highlight: searchInput">
+        </p>
+        <p class="department"
+            [innerHTML]=" 'Department - ' + training.department | highlight: searchInput">
+        </p>
+        <p class="description"
+            [innerHTML]="training.description | highlight: searchInput">
+        </p>
         <a class="icon" [routerLink]="'edit/' + training.id" >✎</a>
     </li>
 </ul>
