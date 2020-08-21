@@ -93,7 +93,7 @@ export class CreateTrainingComponent implements OnInit, AfterViewInit {
   edit(form: NgForm): void {
     this.save(
       form,
-      this.trainingService.editTaining(form.value),
+      this.trainingService.editTaining(new Training(form.value)),
       {
         title: 'Changing',
         text: 'Training is being editted...',
